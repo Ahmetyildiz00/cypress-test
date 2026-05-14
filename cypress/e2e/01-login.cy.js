@@ -38,7 +38,7 @@ describe('01 - Login | Giriş Yapma', () => {
     cy.contains('Giriş başarısız', { timeout: 10000 }).should('be.visible');
   });
 
-  it('TC-1.5 — Geçerli kimlik bilgileri ile başarılı giriş', () => {
+  it('TC-1.4 — Geçerli kimlik bilgileri ile başarılı giriş', () => {
     emailInput().type(Cypress.env('loginEmail'));
     passwordInput().type(Cypress.env('loginPassword'));
     submitButton().click();
@@ -46,7 +46,7 @@ describe('01 - Login | Giriş Yapma', () => {
     cy.url({ timeout: 15000 }).should('not.include', '/account/login');
   });
 
-  it('TC-1.6 — "Şifremi Unuttum" linkinin çalışması', () => {
+  it('TC-1.5 — "Şifremi Unuttum" linkinin çalışması', () => {
     cy.contains(/şifremi unuttum/i).click();
 
     cy.url().should('not.include', '/account/login');
