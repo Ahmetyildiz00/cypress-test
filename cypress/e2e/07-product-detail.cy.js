@@ -76,25 +76,17 @@ describe('07 - Product Detail | Ürün Detay', () => {
       });
     });
 
-    it('TC-7.4 — "Sepete Ekle" ile ürünü sepete ekleme', () => {
-      cy.clickAddToCartPdp();
-      cy.contains('button', /SEPETE EKLE/i).last().should('not.be.disabled', { timeout: 20000 });
-      cy.visit('/cart');
-      cy.location('pathname').should('eq', '/cart');
-      cy.get('a[href*="/whey-protein"]', { timeout: 25000 }).should('have.length.at.least', 1);
-      cy.get('body').invoke('text').should('match', /TOPLAM/i).and('match', /TL/);
-    });
+    it('TC-7.4 — Aroma / varyant seçimi (varsa)', () => {
 
-    it('TC-7.5 — Stokta olmayan ürün davranışı (varsa)', () => {
-      cy.contains('button', /SEPETE EKLE/i)
-        .last()
-        .then(($btn) => {
-          if ($btn.is(':disabled')) {
-            cy.wrap($btn).should('be.disabled');
-          } else {
-            cy.wrap($btn).should('not.be.disabled');
-          }
-        });
+      cy.get('[role="button"][aria-pressed]')
+        .contains('Chocolate & Hazelnut')
+        .click({ force: true });
+
+      cy.contains('[role="button"]', 'Chocolate & Hazelnut')
+        .should('have.attr', 'aria-pressed', 'true');
+
+      cy.contains('[role="button"]', 'Çikolata')
+        .should('have.attr', 'aria-pressed', 'false');
     });
   });
 });

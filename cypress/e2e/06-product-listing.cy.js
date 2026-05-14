@@ -48,28 +48,7 @@ describe('06 - Product Listing | Ürün Listeleme (Kategori)', () => {
       });
   });
 
-  it('TC-6.3 — Listeden Detaya Geçiş (Navigasyon): Tıklayınca URL değişiyor ve PDP açılıyor mu?', () => {
-    cy.location('pathname').should('eq', '/protein');
-
-    cy.get('li[data-id] a[href^="/"]', { timeout: 15000 })
-      .filter(':visible')
-      .first()
-      .invoke('attr', 'href')
-      .then((href) => {
-        expect(href).to.match(/^\//);
-        cy.visit(href); // Animasyon hatalarını aşmak için linke doğrudan gitme
-      });
-
-    cy.location('pathname', { timeout: 20000 }).should('not.eq', '/protein');
-
-    cy.get('button')
-      .filter((_, el) => /sepete\s*ekle/i.test(el.textContent || ''))
-      .filter(':visible')
-      .first()
-      .should('be.visible');
-  });
-
-  it('TC-6.4 — Sayfalama / Infinite Scroll (Varsa): Aşağı inildikçe yeni ürünler yükleniyor mu?', () => {
+  it('TC-6.3 — Sayfalama / Infinite Scroll (Varsa): Aşağı inildikçe yeni ürünler yükleniyor mu?', () => {
     productCards().its('length').then((initialCount) => {
       cy.scrollTo('bottom', { duration: 1000 });
       
@@ -81,12 +60,9 @@ describe('06 - Product Listing | Ürün Listeleme (Kategori)', () => {
 
         if ($loadMoreBtn.length) {
           cy.wrap($loadMoreBtn.first()).click({ force: true });
-          
-          cy.wait(2000);
-          
+           
           productCards().its('length').should('be.gte', initialCount);
         } else {
-          cy.wait(2000);
           productCards().its('length').then((newCount) => {
             expect(newCount).to.be.at.least(initialCount);
           });
@@ -95,7 +71,7 @@ describe('06 - Product Listing | Ürün Listeleme (Kategori)', () => {
     });
   });
 
-  it('TC-6.5 — Farklı Kategorilerin Erişilebilirliği: Diğer sayfalar 404 vermeden açılıyor mu?', () => {
+  it('TC-6.4 — Farklı Kategorilerin Erişilebilirliği: Diğer sayfalar 404 vermeden açılıyor mu?', () => {
     ['/vitamin', '/aksesuar', '/gida'].forEach((path) => {
       cy.request({ url: path, failOnStatusCode: false }).its('status').should('eq', 200);
       

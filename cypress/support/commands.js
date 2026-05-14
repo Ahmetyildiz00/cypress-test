@@ -16,3 +16,7 @@ Cypress.Commands.add('acceptCookies', () => {
     }
   });
 });
+
+Cypress.Commands.add('clickAddToCartPdp', () => {
+  cy.contains('button', /SEPETE EKLE/i).last().scrollIntoView().click({ force: true });
+});
