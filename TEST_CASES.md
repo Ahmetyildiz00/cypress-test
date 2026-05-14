@@ -50,7 +50,7 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
   - Form gönderilmez veya "geçersiz e-posta" mesajı görünür
   - URL hâlâ `/account/login` olmalı
 
-### TC-1.3 — Hatalı e-posta / hatalı şifre ile giriş
+### TC-1.3 — Hatalı bilgiler ile giriş
 
 - **Amaç:** Sistemin yanlış kimlik bilgilerini reddetmesini doğrulamak
 - **Ön koşul:** Login sayfası açık
@@ -61,16 +61,6 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
 - **Beklenen sonuç:**
   - Hata mesajı görünür (örn. "E-posta veya şifre hatalı")
   - Kullanıcı giriş yapamaz, login sayfasında kalır
-
-### TC-1.4 — Doğru e-posta / hatalı şifre ile giriş
-
-- **Amaç:** Sadece şifre yanlışsa da girişin engellendiğini doğrulamak
-- **Ön koşul:** Login sayfası açık, geçerli bir hesap mevcut
-- **Adımlar:**
-  1. E-posta: `testuser_v0@gmail.com`
-  2. Şifre: `WrongPass123?`
-  3. "Giriş Yap" butonuna bas
-- **Beklenen sonuç:** Hata mesajı, login sayfasında kalır
 
 ### TC-1.5 — Geçerli kimlik bilgileri ile başarılı giriş
 
@@ -90,20 +80,12 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
   1. Login sayfasında "Şifremi Unuttum" linkine tıkla
 - **Beklenen sonuç:** Şifre sıfırlama sayfasına yönlendirilir
 
-### TC-1.7 — "Üye Ol" linkine geçiş
-
-- **Amaç:** Login sayfasından kayıt sayfasına geçişin çalışması
-- **Adımlar:**
-  1. Login sayfasında "Üye Ol" sekmesine/linkine tıkla
-- **Beklenen sonuç:** `/account/register` sayfasına yönlendirilir
-
 ---
 
 ## 2. 02-register.cy.js — Üye Olma
 
 **Test edilen sayfa:** `/account/register`
 
-> ⚠️ Her başarılı çalıştırmadan sonra `cypress.env.json` içindeki `registerEmail`, `registerFirstName`, `registerLastName` değerlerini elle güncellemen gerekir (örn. v1 → v2).
 
 ### TC-2.1 — Boş form ile kayıt denemesi
 
@@ -287,12 +269,6 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
   1. Ana sayfada arama input alanını incele
 - **Beklenen sonuç:** Placeholder "150+'den fazla üründen ara" benzeri, input görünür
 
-### TC-5.2 — Boş arama ile gönderim
-
-- **Adımlar:**
-  1. Arama alanına hiçbir şey yazmadan "ARA" butonuna bas
-- **Beklenen sonuç:** Sayfa olduğu yerde kalır veya "lütfen bir şey yazın" uyarısı görünür
-
 ### TC-5.3 — Geçerli bir ürün adı ile arama ("whey")
 
 - **Adımlar:**
@@ -320,12 +296,6 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
 - **Adımlar:**
   1. `kreatin` yaz, aramayı gönder
 - **Beklenen sonuç:** Kreatin ürünleri listelenir
-
-### TC-5.7 — Arama sonucundan ürün detayına gitme
-
-- **Adımlar:**
-  1. Bir arama yap ve sonuçlardan ilk ürüne tıkla
-- **Beklenen sonuç:** Ürün detay sayfası açılır
 
 ---
 
@@ -418,12 +388,6 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
   - Başarılı eklenme bildirimi görünür (toast / modal)
   - Header sepet ikonunda ürün sayısı 1 artar
 
-### TC-7.7 — Stokta olmayan ürün davranışı (eğer varsa)
-
-- **Adımlar:**
-  1. Stokta olmayan bir ürün bulunursa açıp "Sepete Ekle"yi dene
-- **Beklenen sonuç:** Buton disabled veya "Stokta Yok" gösterimi
-
 ---
 
 ## 8. 08-cart.cy.js — Sepet
@@ -484,7 +448,3 @@ Bu dosya, her test spec dosyasının içerdiği test senaryolarını **adım ad�
 - **Beklenen sonuç:** Her iki ürün de listede görünür, toplam doğru hesaplanır
 
 ---
-
-## Not — Beklenen sonuçların hassasiyeti
-
-Site canlı olduğu için bazı detaylar (örn. tam hata mesajı metni, varyant tipleri) değişebilir. Testlerde **mümkün olduğunca yumuşak (loose) eşleşme** kullanılır (regex, `contains`) ki ufak metin değişiklikleri testleri kırmasın.
