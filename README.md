@@ -92,16 +92,16 @@ Test verileri [cypress.env.json](cypress.env.json) içinde tutulur. Testleri her
 
 ```json
 {
-  "loginEmail": "testuser_v0@gmail.com",
-  "loginPassword": "Testuser1?",
-  "registerFirstName": "test1",
-  "registerLastName": "user1",
-  "registerEmail": "testuser_v1@gmail.com",
-  "registerPassword": "Testuser1?",
-  "invalidEmail": "wrong_user@gmail.com",
-  "invalidPassword": "WrongPass123?",
-  "realAccountEmail": "ahmet.yildiz@etkin.ai",
-  "realAccountPassword": "Testuser1?"
+  "loginEmail": "************",
+  "loginPassword": "************",
+  "registerFirstName": "************",
+  "registerLastName": "************",
+  "registerEmail": "************",
+  "registerPassword": "************",
+  "invalidEmail": "************",
+  "invalidPassword": "************",
+  "realAccountEmail": "************",
+  "realAccountPassword": "************"
 }
 ```
 
