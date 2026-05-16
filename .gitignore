@@ -7,3 +7,4 @@ cypress/downloads/
 npm-debug.log*
 .env
 .env.local
+cypress.env.json
